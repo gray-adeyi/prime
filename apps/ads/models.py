@@ -1,17 +1,26 @@
-from distutils.command.upload import upload
 from django.db import models
 
 # Create your models here.
 
 
-class Site(models.Model):
-    """
-    Model holds website data.
-    """
+class Client(models.Model):
     name = models.CharField(max_length=50)
-    favion = models.ImageField(upload_to='site/favicon/images')
-    appleicon = models.ImageField(upload_to='site/appleicon/images')
-    logo = models.ImageField(upload_to='site/logo/images')
+    logo = models.ImageField(upload_to='client/logo/images')
+    description = models.TextField(blank=True)
 
     def __str__(self) -> str:
         return self.name
+
+
+class Ads(models.Model):
+    models.ForeignKey(Client, on_delete=models.CASCADE, null=True)
+    creation_timestamp = models.DateTimeField(auto_now_add=True)
+    expiry_timestamp = models.DateField()
+
+    class Meta:
+        verbose_name_plural = 'Ads'
+
+
+class Poster(models.Model):
+    ads = models.ForeignKey(Ads, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='poster/image/images')
