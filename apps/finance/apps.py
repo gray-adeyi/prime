@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class CashierConfig(AppConfig):
-    name = 'cashier'
+class FinanceConfig(AppConfig):
+    name = 'apps.finance'
