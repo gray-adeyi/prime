@@ -1,4 +1,5 @@
 from django.db import models
+from ..customer.models import Customer
 
 # Create your models here.
 
@@ -15,7 +16,8 @@ class Transaction(models.Model):
     )
 
     block = models.ForeignKey(Block, on_delete=models.CASCADE)
-    customer = models.ForeignKey()
-    amount = models.DecimalField()
+    customer = models.ForeignKey(
+        Customer, on_delete=models.SET_NULL, null=True)
+    amount = models.DecimalField(max_digits=8, decimal_places=2)
     status = models.CharField(max_length=2, choices=STATUS_OPTIONS)
     timestamp = models.DateTimeField(auto_now_add=True)
