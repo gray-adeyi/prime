@@ -1,0 +1,16 @@
+{% extends 'core/base_site.html' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block content %}
+<ul>
+    <li><a href="{% url 'core:signup' %}">sign up</a></li>
+    <li><a href="">login as customer</a></li>
+    <li><a href="">login as editor</a></li>
+    <li><a href="">store</a></li>
+</ul>
+{% endblock %}
+
+{% block scripts %}{% endblock %}
