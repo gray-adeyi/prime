@@ -1,9 +1,67 @@
-{% extends 'core/base_site.html' %}
-
+{% extends 'core/base.html' %}
+{% load static %}
 {% block title %}sign up{% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'core/css/signin.css' %}">
+{% endblock %}
 
-{% block content %}{% endblock %}
+{% block body %}
 
-{% block scripts %}{% endblock %}
+<body class="text-center">
+
+    <main class="form-signin">
+        <form method="post">
+            {% csrf_token %}
+            <a href="{% url 'core:index' %}"><img class="mb-4" src="{% static 'core/prime.svg' %}" alt="" width="72"
+                    height="57"></a>
+            <h1 class="h3 mb-3 fw-normal">Sign Up</h1>
+
+            <div class="form-floating mb-2">
+                <input type="email" class="form-control" name="email" required id="id_email"
+                    placeholder="coyotedevmail@gmail.com">
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating mb-2">
+                <input type="text" class="form-control" name="username" maxlength="50" required id="id_username"
+                    placeholder="jigani">
+                <label for="floatingInput">Username</label>
+            </div>
+
+            <div class="form-floating">
+                <input type="password" class="form-control" name="password" id="id_password" required maxlength="128"
+                    placeholder="*****">
+                <label for="floatingInput">Password</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" name="confirm_password" required maxlength="128"
+                    id="id_confirm_password" placeholder="*****">
+                <label for="floatingInput">Confirm Password</label>
+            </div>
+
+            <hr>
+            <b class="mb-3">Sign up as</b>
+
+            <div class="my-3">
+                <div class="form-check">
+                    <input id="id_user_type_0" name="user_type" type="radio" class="form-check-input" checked required
+                        value="0" maxlength="1">
+                    <label class="form-check-label" for="credit">Customer (Photographer)</label>
+                </div>
+                <div class="form-check">
+                    <input id="id_user_type_1" name="user_type" type="radio" class="form-check-input" required
+                        maxlength="1">
+                    <label class="form-check-label" for="debit">Editor</label>
+                </div>
+            </div>
+            <hr>
+
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
+        </form>
+    </main>
+
+
+
+</body>
+{% endblock %}
