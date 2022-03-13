@@ -1,5 +1,8 @@
 from django.urls import path
+from . import views
 
 app_name = 'editor'
 
-url_patterns = []
+urlpatterns = [
+    path('login/', views.login_editor, name='login'),
+]
