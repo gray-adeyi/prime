@@ -20,8 +20,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('ads/', include('apps.ads.urls')),
     path('', include('apps.core.urls')),
-    # path('customer/', include('apps.customer.urls')),
-    # path('editor/', include('apps.editor.urls')),
+    path('customer/', include('apps.customer.urls')),
+    path('editor/', include('apps.editor.urls')),
     # path('finance/', include('apps.finance.urls')),
     # path('store/', include('apps.store.urls')),
 ]
