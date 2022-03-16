@@ -60,6 +60,7 @@ class Signup(FormView):
             messages.warning(
                 self.request, f"You'll be unable to login at the moment as you'll need the admin to authorize you. please bear with us, you'll receive a message soon.")
             # redirect to editor login
+            return redirect('editor:login')
         messages.error(self.request, 'Unknown user type. Try again')
         return redirect('core:signup')
 
