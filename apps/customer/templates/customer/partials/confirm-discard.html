@@ -1,0 +1,8 @@
+<div class="card">
+    <div class="card-body">
+        <h4>Are you sure you want to delete this booking? This action cannot be undone when taken</h4>
+        <a href="{% url 'customer:dashboard' %}" class="btn btn-success">No</a>
+        <a hx-get="{% url 'customer:discard-booking' job_id=job.id %}" hx-target="#bookingsPreview"
+            class="btn btn-danger">Yes</a>
+    </div>
+</div>

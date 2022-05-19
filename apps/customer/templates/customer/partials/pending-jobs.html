@@ -1,0 +1,12 @@
+<h5>Pending Bookings</h5>
+<p>A list of jobs that you have booked and have not approved for printing</p>
+<div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+        {% for job in pending_jobs %}
+        <li class="list-group-item"><a href="#" hx-get="{% url 'customer:show-pending-jobs' id=job.id %}"
+                hx-swap="inner" hx-target="#bookJob">
+                {{ job.copies }} exposure{{ job.copies | pluralize }} booked on {{ job.timestamp | date:"d M, Y" }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

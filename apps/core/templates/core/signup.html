@@ -11,6 +11,27 @@
 <body class="text-center">
 
     <main class="form-signin">
+        {% for message in messages %}
+        {% if message.tags == 'error' %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ message.message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% else %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message.message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+
+
         <form method="post">
             {% csrf_token %}
             <a href="{% url 'core:index' %}"><img class="mb-4" src="{% static 'core/prime.svg' %}" alt="" width="72"
@@ -18,20 +39,37 @@
             <h1 class="h3 mb-3 fw-normal">Sign Up</h1>
 
             <div class="form-floating mb-2">
-                <input type="email" class="form-control" name="email" required id="id_email"
-                    placeholder="coyotedevmail@gmail.com">
+                <input type="email" {% if form.email.value %}value="{{ form.email.value }}" {% endif %}
+                    class="form-control {% if form.email.errors %}is-invalid{% endif %}" name="email" required
+                    id="id_email" placeholder="coyotedevmail@gmail.com">
                 <label for="floatingInput">Email address</label>
+                {% if form.email.errors %}
+                <div class="invalid-feedback">
+                    {{ form.email.errors }}
+                </div>
+                {% endif %}
             </div>
             <div class="form-floating mb-2">
-                <input type="text" class="form-control" name="username" maxlength="50" required id="id_username"
-                    placeholder="jigani">
+                <input type="text" {% if form.username.value %}value="{{ form.username.value }}" {% endif %}
+                    class="form-control {% if form.username.errors %}is-invalid{% endif %}" name="username"
+                    maxlength="50" required id="id_username" placeholder="jigani">
                 <label for="floatingInput">Username</label>
+                {% if form.username.errors %}
+                <div class="invalid-feedback">
+                    {{ form.username.errors }}
+                </div>
+                {% endif %}
             </div>
 
             <div class="form-floating">
-                <input type="password" class="form-control" name="password" id="id_password" required maxlength="128"
-                    placeholder="*****">
+                <input type="password" class="form-control {% if form.password.errors %}is-invalid{% endif %}"
+                    name="password" id="id_password" required maxlength="128" placeholder="*****">
                 <label for="floatingInput">Password</label>
+                {% if form.password.errors %}
+                <div class="invalid-feedback">
+                    {{ form.password.errors }}
+                </div>
+                {% endif %}
             </div>
             <div class="form-floating">
                 <input type="password" class="form-control" name="confirm_password" required maxlength="128"
@@ -49,7 +87,7 @@
                     <label class="form-check-label" for="credit">Customer (Photographer)</label>
                 </div>
                 <div class="form-check">
-                    <input id="id_user_type_1" name="user_type" type="radio" class="form-check-input" required
+                    <input id="id_user_type_1" name="user_type" type="radio" class="form-check-input" required value="1"
                         maxlength="1">
                     <label class="form-check-label" for="debit">Editor</label>
                 </div>

@@ -1,0 +1,64 @@
+<div class="card" id="bookingsPreview">
+    <div class="card-header">
+        <a href="{% url 'customer:dashboard' %}" class="controls close-control float-end">⨯</a>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">SELECTION FOR PRINTING</h5>
+        <p class="text-danger">Your picture quality that is sent for printing is exactly the one you sent to us. We
+            trust
+            that you have made all the necessary optimizations as jobs from this platform are sent for direct printing
+        </p>
+
+        <div id="payMethods">
+            <div class="card text-white bg-light mb-3" style="max-width: 18rem; color: black !important;">
+                <div class="card-header">Summary</div>
+                <div class="card-body">
+                    <h5 class="card-title">Total: ₦{{ job.total_price }}</h5>
+                    <div class="card-text">
+                        <ul>
+                            <li>Total Copies: {{ job.copies_count }}</li>
+                            <li>Job type: {{ job.get_job_type_display }}</li>
+                            <li>Writeup: {% if job.write_up %}{{ job.write_up }}{% else%}No write up{% endif %}</li>
+                            <li>Price Per Copy: ₦{{ job.price_per_unit }}</li>
+                        </ul>
+                        <div><button class="btn btn-lg btn-success" hx-target="#payMethods"
+                                hx-get="{% url 'customer:pay-methods' id=job.id %}">Pay</button>
+                            <button class="btn btn-lg btn-danger" title="Delete this booking" hx-target="#payMethods"
+                                hx-get="{% url 'customer:confirm-discard' job_id=job.id %}">Discard</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for exposure in job.exposures.all %}
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ exposure.image.url }}" class="img-fluid rounded-start"
+                            alt="{{ exposure.image.name }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ exposure.image.name }}</h5>
+                            <div class="card-text">
+                                <b>Copies: </b> <button class="btn btn-secondary"
+                                    hx-get="{% url 'customer:dec' id=exposure.id %}"
+                                    hx-target="#bookingsPreview">-</button>
+                                <span style="font-weight:bold; font-size:30px;">{{ exposure.copies }}</span> <button
+                                    class="btn btn-secondary" hx-get="{% url 'customer:inc' id=exposure.id %}"
+                                    hx-target="#bookingsPreview">+</button>
+                                <button class="btn btn-secondary" hx-get="{% url 'customer:del' id=exposure.id %}"
+                                    hx-target="#bookingsPreview">⨯</button>
+                                </p>
+                            </div>
+                            <p class="card-text"><small class="text-muted">Sub Total Price:
+                                    ₦{{ exposure.total_price }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

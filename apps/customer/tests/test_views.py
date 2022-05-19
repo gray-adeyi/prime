@@ -19,10 +19,11 @@ class TestViews(TestCase):
         customer = models.Customer.objects.create(user=user)
         client = Client()
         login_credentials = {
-            'login_id': 'jiganidd',
+            'login_id': 'jigani',
             'password': 'iLoveRice'
         }
         response = client.post(reverse('customer:login'),
                                data=login_credentials)
         # self.assertRedirects(response, reverse('customer:dashboard'), 302)
-        self.assertFormError(response, 'form', 'login_id', 'lol')
+        self.assertRedirects(response, reverse(
+            "customer:dashboard"), status_code=302, target_status_code=200)

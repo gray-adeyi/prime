@@ -42,3 +42,11 @@ class LoginForm(LoginFormMixin, forms.Form):
             self.add_error('login_id', 'Customer account does not exist')
         except Exception as e:
             raise(e)
+
+
+class BookJobForm(forms.Form):
+    """
+    Forms
+    """
+    write_up = forms.CharField(required=False)
+    picture_files = forms.FileField()

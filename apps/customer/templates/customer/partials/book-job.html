@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-header">
+        <a href="{% url 'customer:dashboard' %}" class="controls close-control float-end">⨯</a>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">BOOK JOB</h5>
+        <form hx-encoding='multipart/form-data' hx-post='{% url "customer:new-booking" %}'
+            hx-indicator="#uploadJobIndicator">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="write_up" class="form-label">Write up</label>
+                <input type="text" class="form-control" id="write_up" name="write_up" placeholder="(*Optional)">
+            </div>
+            <div class="mb-3">
+                <label for="formFileLg" class="form-label">Select the pictures for printing</label>
+                <input class="form-control form-control-lg" id="picture_files" type="file" name="picture_files"
+                    multiple>
+            </div>
+            <button class='btn btn-lg btn-success' type="submit">Upload <div id="uploadJobIndicator"
+                    class="spinner-border text-white htmx-indicator" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div></button>
+        </form>
+    </div>
+</div>

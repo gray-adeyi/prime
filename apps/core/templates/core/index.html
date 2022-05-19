@@ -42,11 +42,11 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Sign In
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="loginDropdownMenu">
+                        <ul class="dropdown-menu" aria-labelledby="loginDropdownMenu" style="text-shadow: none;">
                             <li>
                                 <h6 class="dropdown-header">Sign in as</h6>
                             </li>
-                            <li><a class="dropdown-item" href="{% url 'customer:login' %}">Custom (Photographer)</a>
+                            <li><a class="dropdown-item" href="{% url 'customer:login' %}">Customer (Photographer)</a>
                             </li>
                             <li><a class="dropdown-item" href="{% url 'editor:login' %}">Editor</a></li>
                         </ul>
@@ -57,17 +57,17 @@
         </header>
 
         <main class="px-3">
-            <h1>Prime Labs</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit
-                the text, and add your own fullscreen background photo to make it your own.</p>
+            <h1>Prime Colour Labs</h1>
+            <p class="lead">Commited to the service of preservation of beautiful human experience through photography
+            </p>
             <p class="lead">
-                <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a>
+                <a href="{% url 'core:about' %}" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn
+                    more</a>
             </p>
         </main>
 
         <footer class="mt-auto text-white-50">
-            <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a
-                    href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
+            <p>All rights reserved <a href="" class="text-white">Prime Developers</a>
         </footer>
     </div>
 

@@ -95,3 +95,7 @@ class Signup(FormView):
 
 class Index(TemplateView):
     template_name = 'core/index.html'
+
+
+class About(TemplateView):
+    template_name = 'core/about.html'

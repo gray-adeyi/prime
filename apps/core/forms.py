@@ -109,8 +109,10 @@ class LoginFormMixin:
                 correct_password = user.check_password(password)
                 if correct_password:
                     self.add_error(
-                        'login_id', 'Your account has been disabled')
-            self.add_error('password', 'Incorrect password')
+                        'login_id', "Your account has been disabled. If you're using this platform for the first time, please know that all is fine. It's just security feature to prevent unauthorized access. Contact us to enable your account")
+                    return
+            self.add_error(
+                'password', 'Incorrect password. Try again with the correct password')
 
     def get_username(self, login_id: str) -> str:
         if self._is_email(login_id):
